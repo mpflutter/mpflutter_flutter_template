@@ -1,0 +1,24 @@
+name: mpflutter_flutter_template
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mp_flutter_runtime: 
+    path: /Users/saiakirahui/Documents/mpflutter/mpflutter/packages/mp_flutter_runtime
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets: 
+    - assets/
+    

@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mp_flutter_runtime/mp_flutter_runtime.dart';
+import 'package:mpflutter_flutter_template/ext/template_method_channel.dart';
+import 'package:mpflutter_flutter_template/mp_config.dart';
+
+void main() {
+  extMain();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'MPFlutter Template',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MPFlutterContainerPage(),
+    );
+  }
+}
+
+class MPFlutterContainerPage extends StatefulWidget {
+  const MPFlutterContainerPage({Key? key}) : super(key: key);
+
+  @override
+  State<MPFlutterContainerPage> createState() => _MPFlutterContainerPageState();
+}
+
+class _MPFlutterContainerPageState extends State<MPFlutterContainerPage> {
+  MPEngine? engine;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    initEngine();
+  }
+
+  void initEngine() async {
+    if (engine == null) {
+      final engine = MPEngine(flutterContext: context);
+      if (MPConfig.dev) {
+        engine.initWithDebuggerServerAddr('${MPConfig.devServer}:9898');
+      } else {
+        engine.initWithMpkData(
+          (await rootBundle.load('assets/app.mpk')).buffer.asUint8List(),
+        );
+      }
+      await engine.start();
+      setState(() {
+        this.engine = engine;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (engine == null) return const SizedBox();
+    return MPPage(engine: engine!);
+  }
+}
