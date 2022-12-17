@@ -34,27 +34,9 @@ class MPFlutterContainerPage extends StatefulWidget {
 
 class _MPFlutterContainerPageState extends State<MPFlutterContainerPage> {
   MPEngine? engine;
-  final controller = MPPageController();
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller.addListener(() {
-      if (controller.firstFrameRendered) {
-        Splash.hide(context);
-      }
-    });
-  }
 
   @override
   void didChangeDependencies() {
-    Splash.show(context);
     super.didChangeDependencies();
     initEngine();
   }
@@ -79,7 +61,7 @@ class _MPFlutterContainerPageState extends State<MPFlutterContainerPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (engine == null) return const SizedBox();
-    return MPPage(engine: engine!, controller: controller);
+    if (engine == null) return const Splash();
+    return MPPage(engine: engine!, splash: const Splash());
   }
 }
