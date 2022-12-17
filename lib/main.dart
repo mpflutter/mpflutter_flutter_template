@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mp_flutter_runtime/mp_flutter_runtime.dart';
 import 'package:mpflutter_flutter_template/ext/template_method_channel.dart';
 import 'package:mpflutter_flutter_template/mp_config.dart';
+import 'package:mpflutter_flutter_template/splash.dart';
 
 void main() {
   extMain();
@@ -33,9 +34,27 @@ class MPFlutterContainerPage extends StatefulWidget {
 
 class _MPFlutterContainerPageState extends State<MPFlutterContainerPage> {
   MPEngine? engine;
+  final controller = MPPageController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      if (controller.firstFrameRendered) {
+        Splash.hide(context);
+      }
+    });
+  }
 
   @override
   void didChangeDependencies() {
+    Splash.show(context);
     super.didChangeDependencies();
     initEngine();
   }
@@ -50,16 +69,17 @@ class _MPFlutterContainerPageState extends State<MPFlutterContainerPage> {
           (await rootBundle.load('assets/app.mpk')).buffer.asUint8List(),
         );
       }
-      await engine.start();
       setState(() {
         this.engine = engine;
       });
+      await Future.delayed(const Duration(milliseconds: 100));
+      await engine.start();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     if (engine == null) return const SizedBox();
-    return MPPage(engine: engine!);
+    return MPPage(engine: engine!, controller: controller);
   }
 }
