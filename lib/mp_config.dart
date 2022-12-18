@@ -1,4 +1,4 @@
 class MPConfig {
-  static const String devServer = "10.0.1.69";
+  static const String devServer = "127.0.0.1";
   static const bool dev = true;
 }

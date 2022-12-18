@@ -215,10 +215,10 @@ packages:
   mp_flutter_runtime:
     dependency: "direct main"
     description:
-      path: "/Users/saiakirahui/Documents/mpflutter/mpflutter/packages/mp_flutter_runtime"
-      relative: false
-    source: path
-    version: "0.17.0"
+      name: mp_flutter_runtime
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.20.0"
   octo_image:
     dependency: transitive
     description:
@@ -372,7 +372,7 @@ packages:
       name: shared_preferences_linux
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   shared_preferences_macos:
     dependency: transitive
     description:
@@ -400,7 +400,7 @@ packages:
       name: shared_preferences_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -510,7 +510,7 @@ packages:
       name: win32
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.1.2"
+    version: "3.1.3"
   xdg_directories:
     dependency: transitive
     description:

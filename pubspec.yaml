@@ -9,8 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  mp_flutter_runtime: 
-    path: /Users/saiakirahui/Documents/mpflutter/mpflutter/packages/mp_flutter_runtime
+  mp_flutter_runtime: ^0.20.0
 
 dev_dependencies:
   flutter_test:
